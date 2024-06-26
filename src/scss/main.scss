@@ -1,6 +1,5 @@
-/*
-  Aquí van tus estilos o los @import './tus/ficheros'
-*/
+@import './core/reset.scss';
+@import './componentes/header.scss';
 
 body {
   background-color: lightblue;
