@@ -1,5 +1,7 @@
 'use strict';
 const cardsElement = document.querySelector('.js__cards');
+const searchBtn = document.querySelector('.js__btn');
+const searchInput = document.querySelector('.js__input');
 
 let data = [];
 
@@ -11,6 +13,7 @@ fetch('https://api.disneyapi.dev/character?pageSize=50')
   })
 
   function renderCharacters(charactersList) {
+    cardsElement.innerHTML = "";
     for(const character of charactersList) {
       let image 
       if (character.imageUrl != undefined){
@@ -24,5 +27,10 @@ fetch('https://api.disneyapi.dev/character?pageSize=50')
         </li>` 
     }
   }
+  searchBtn.addEventListener('click', (ev) => {
+    ev.preventDefault();
+    const characterFilteredByName = data.filter(element => element.name.toLowerCase().includes(searchInput.value.toLowerCase()))
+    renderCharacters(characterFilteredByName)
+  })
 
 
