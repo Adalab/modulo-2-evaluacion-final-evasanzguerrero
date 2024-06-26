@@ -34,6 +34,8 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  width: 237px;
+  height: 263px;
 }
 .card_img {
   width: 227px;
@@ -45,4 +47,12 @@
 }
 .favourite {
   background-color: cadetblue;
+}
+.three_columns {
+  grid-template-columns: repeat(3, 1fr);
+}
+.favourites {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }

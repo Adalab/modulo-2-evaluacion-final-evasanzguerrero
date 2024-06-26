@@ -12,7 +12,11 @@ fetch('https://api.disneyapi.dev/character?pageSize=50')
   .then(json => {
     data = json.data;
     render(cardsElement, data);
-    const cards = document.querySelectorAll('.js__card');
+    addCardEventListener();
+  })
+
+  function addCardEventListener() {
+    const cards = cardsElement.querySelectorAll('.js__card');
     for(const card of cards) {
       card.addEventListener('click', (ev) =>{
         ev.preventDefault()
@@ -26,12 +30,14 @@ fetch('https://api.disneyapi.dev/character?pageSize=50')
           }
         }
         if(!found) {
+          cardsElement.classList.add('three_columns')
+          cardsElement.classList.remove('four_columns')
           favourites.push({imageUrl,name})
           render(favouritesElement, favourites)
         }
       })
     }
-  })
+  }
 
   function render(element, charactersList) {
     element.innerHTML = "";
@@ -50,8 +56,14 @@ fetch('https://api.disneyapi.dev/character?pageSize=50')
   }
   searchBtn.addEventListener('click', (ev) => {
     ev.preventDefault();
-    const characterFilteredByName = data.filter(element => element.name.toLowerCase().includes(searchInput.value.toLowerCase()))
-    render(cardsElement, characterFilteredByName)
+    const name = searchInput.value.toLowerCase();
+    fetch(`https://api.disneyapi.dev/character?pageSize=50&name=${name}`)
+      .then(response => response.json())
+      .then(json => {
+        data = json.data;
+        render(cardsElement, data);
+        addCardEventListener();
+      })
   })
   
   
