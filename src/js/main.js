@@ -2,24 +2,39 @@
 const cardsElement = document.querySelector('.js__cards');
 const searchBtn = document.querySelector('.js__btn');
 const searchInput = document.querySelector('.js__input');
+const favouritesElement = document.querySelector('.js__favourites');
 
 let data = [];
+let favourites = [];
 
 fetch('https://api.disneyapi.dev/character?pageSize=50')
   .then(response => response.json())
   .then(json => {
     data = json.data;
-    renderCharacters(data);
+    render(cardsElement, data);
     const cards = document.querySelectorAll('.js__card');
     for(const card of cards) {
       card.addEventListener('click', (ev) =>{
-        ev.currentTarget.classList.add('favourite')
+        ev.preventDefault()
+        ev.currentTarget.classList.add('favourite');
+        const imageUrl = ev.currentTarget.querySelector('.js__card__img').src;
+        const name = ev.currentTarget.querySelector('.js__card_name').textContent;
+        let found = false;
+        for(const favorite of favourites ) {
+          if(favorite.name === name) {
+            found = true;
+          }
+        }
+        if(!found) {
+          favourites.push({imageUrl,name})
+          render(favouritesElement, favourites)
+        }
       })
     }
   })
 
-  function renderCharacters(charactersList) {
-    cardsElement.innerHTML = "";
+  function render(element, charactersList) {
+    element.innerHTML = "";
     for(const character of charactersList) {
       let image 
       if (character.imageUrl != undefined){
@@ -27,16 +42,16 @@ fetch('https://api.disneyapi.dev/character?pageSize=50')
       } else {
         image ='https://via.placeholder.com/210x295/ffffff/555555/?text=Disney';
       }
-      cardsElement.innerHTML +=`<li class="card js__card">
-          <img class="card_img" src="${image}" alt="">
-          <div class="card_name">${character.name}</div>
+      element.innerHTML +=`<li class="card js__card">
+          <img class="card_img js__card__img" src="${image}" alt="">
+          <div class="card_name js__card_name">${character.name}</div>
         </li>` 
     }
   }
   searchBtn.addEventListener('click', (ev) => {
     ev.preventDefault();
     const characterFilteredByName = data.filter(element => element.name.toLowerCase().includes(searchInput.value.toLowerCase()))
-    renderCharacters(characterFilteredByName)
+    render(cardsElement, characterFilteredByName)
   })
   
   
