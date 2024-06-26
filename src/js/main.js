@@ -10,6 +10,12 @@ fetch('https://api.disneyapi.dev/character?pageSize=50')
   .then(json => {
     data = json.data;
     renderCharacters(data);
+    const cards = document.querySelectorAll('.js__card');
+    for(const card of cards) {
+      card.addEventListener('click', (ev) =>{
+        ev.currentTarget.classList.add('favourite')
+      })
+    }
   })
 
   function renderCharacters(charactersList) {
@@ -21,7 +27,7 @@ fetch('https://api.disneyapi.dev/character?pageSize=50')
       } else {
         image ='https://via.placeholder.com/210x295/ffffff/555555/?text=Disney';
       }
-      cardsElement.innerHTML +=`<li class="card">
+      cardsElement.innerHTML +=`<li class="card js__card">
           <img class="card_img" src="${image}" alt="">
           <div class="card_name">${character.name}</div>
         </li>` 
@@ -32,5 +38,7 @@ fetch('https://api.disneyapi.dev/character?pageSize=50')
     const characterFilteredByName = data.filter(element => element.name.toLowerCase().includes(searchInput.value.toLowerCase()))
     renderCharacters(characterFilteredByName)
   })
+  
+  
 
 
