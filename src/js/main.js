@@ -19,7 +19,7 @@ fetch('https://api.disneyapi.dev/character?pageSize=50')
     const cards = cardsElement.querySelectorAll('.js__card');
     for(const card of cards) {
       card.addEventListener('click', (ev) =>{
-        ev.preventDefault()
+        ev.preventDefault();
         ev.currentTarget.classList.add('favourite');
         const imageUrl = ev.currentTarget.querySelector('.js__card__img').src;
         const name = ev.currentTarget.querySelector('.js__card_name').textContent;
@@ -30,28 +30,28 @@ fetch('https://api.disneyapi.dev/character?pageSize=50')
           }
         }
         if(!found) {
-          cardsElement.classList.add('three_columns')
-          cardsElement.classList.remove('four_columns')
-          favourites.push({imageUrl,name})
-          render(favouritesElement, favourites)
+          cardsElement.classList.add('three_columns');
+          cardsElement.classList.remove('four_columns');
+          favourites.push({imageUrl,name});
+          render(favouritesElement, favourites);
         }
-      })
+      });
     }
   }
 
   function render(element, charactersList) {
     element.innerHTML = "";
     for(const character of charactersList) {
-      let image 
+      let image;
       if (character.imageUrl != undefined){
-        image = character.imageUrl
+        image = character.imageUrl;
       } else {
         image ='https://via.placeholder.com/210x295/ffffff/555555/?text=Disney';
       }
       element.innerHTML +=`<li class="card js__card">
           <img class="card_img js__card__img" src="${image}" alt="">
           <div class="card_name js__card_name">${character.name}</div>
-        </li>` 
+        </li>`;
     }
   }
   searchBtn.addEventListener('click', (ev) => {
@@ -63,8 +63,8 @@ fetch('https://api.disneyapi.dev/character?pageSize=50')
         data = json.data;
         render(cardsElement, data);
         addCardEventListener();
-      })
-  })
+      });
+  });
   
   
 
