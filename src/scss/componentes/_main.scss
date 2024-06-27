@@ -5,7 +5,7 @@
   flex-direction: row;
   gap:100px;
 }
-.characters_favourite {
+.characters_favourites {
   display: flex;
   flex-direction: column;
 }
@@ -48,6 +48,7 @@
 }
 .favourite {
   background-color: cadetblue;
+  color:white;
 }
 .three_columns {
   grid-template-columns: repeat(3, 1fr);
