@@ -30,6 +30,7 @@
   grid-template-columns: repeat(4, 1fr);
 }
 .card {
+  position: relative;
   box-shadow: -8px 8px 8px rgba(0, 0, 0, 0.1), 5px 5px 5px rgba(0, 0, 0, 0.1);
   padding: 5px;
   display: flex;
@@ -42,6 +43,7 @@
 .card_img {
   width: 227px;
   height: 227px;
+  position: relative;
 }
 .card_name {
   margin-top: 10px;
@@ -59,4 +61,19 @@
   flex-direction: column;
   gap: 4px;
   background-color: palevioletred;
+}
+.card_btn_close {
+  background-color: white;
+  padding: 4px;
+  border: 1px;
+  font-size: 10px;
+  font-weight: bold;
+  position: absolute;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 10; 
+  right: 5px;
+}
+.card_btn_close:hover {
+  font-size: 18px;
 }
