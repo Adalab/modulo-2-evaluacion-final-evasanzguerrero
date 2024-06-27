@@ -61,6 +61,10 @@ fetch('https://api.disneyapi.dev/character?pageSize=50')
       .then(response => response.json())
       .then(json => {
         data = json.data;
+        if (!Array.isArray(data)) {
+          data = [];
+          data.push(json.data);
+        }
         render(cardsElement, data);
         addCardEventListener();
       });
