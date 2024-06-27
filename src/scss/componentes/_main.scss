@@ -25,7 +25,6 @@
 .cards {
   display: grid;
   gap: 4px;
-  background-color: pink;
 }
 .four_columns {
   grid-template-columns: repeat(4, 1fr);
@@ -38,6 +37,7 @@
   flex-direction: column;
   width: 237px;
   height: 263px;
+  background-color: pink;
 }
 .card_img {
   width: 227px;
