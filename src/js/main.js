@@ -38,6 +38,7 @@ function deleteFavouriteEvent() {
       const deleteName = ev.currentTarget.parentElement.querySelector('.js__card_name').textContent
       favourites = favourites.filter(fav => fav.name !== deleteName)
       render(favouritesElement, favourites, true);
+      deleteFavouriteEvent();
     });
   }
 }
